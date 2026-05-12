@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>力のモーメントのつり合い</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="workspace" aria-label="多孔ボード">
+      <div class="board-stage">
+        <div id="board" class="board" aria-label="回転できる多孔ボード"></div>
+        <div id="successOverlay" class="success-overlay" aria-hidden="true">つり合い成功！</div>
+      </div>
+      <div id="message" class="message is-holding" role="status">手で保持中。おもりやばねばかりを穴へドラッグしてください。</div>
+    </section>
+
+    <aside class="control-panel" aria-label="操作パネル">
+      <header class="panel-header">
+        <h1>力のモーメント</h1>
+      </header>
+
+      <section class="tool-section mode-section" aria-label="板と棒の切り替え">
+        <h2>形</h2>
+        <label class="mode-toggle">
+          <span>板</span>
+          <input id="modeToggle" type="checkbox" aria-label="板モードと棒モードを切り替え" checked>
+          <span class="toggle-track" aria-hidden="true"></span>
+          <span>棒</span>
+        </label>
+      </section>
+
+      <section class="tool-section" aria-label="追加する道具">
+        <h2>追加</h2>
+        <div class="tool-row">
+          <button id="weightTool" class="tool-card" type="button" data-tool="weight" aria-label="おもりをドラッグして追加">
+            <span class="weight-icon" aria-hidden="true">
+              <span></span>
+            </span>
+            <span>おもり<br><small>1N</small></span>
+          </button>
+          <button id="springTool" class="tool-card" type="button" data-tool="spring" aria-label="ばねばかりをドラッグして追加">
+            <span class="spring-icon" aria-hidden="true"></span>
+            <span>ばねばかり<br><small>1.0N</small></span>
+          </button>
+        </div>
+      </section>
+
+      <section class="tool-section" aria-label="操作">
+        <h2>操作</h2>
+        <div class="button-grid">
+          <button id="releaseBtn" class="primary-button" type="button">手を放す</button>
+          <button id="holdBtn" type="button">手で保持する</button>
+          <button id="clearBtn" type="button">すべて外す</button>
+        </div>
+      </section>
+
+      <section class="tool-section spring-editor" aria-label="ばねばかりの調整">
+        <h2>おもり</h2>
+        <div id="weightControls" class="weight-controls" hidden>
+          <div class="small-button-row two-buttons">
+            <button id="removeOneWeightBtn" type="button">1個外す</button>
+            <button id="removeAllWeightsBtn" class="danger-button" type="button">全部外す</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="tool-section spring-editor" aria-label="ばねばかりの調整">
+        <h2>ばねばかり</h2>
+        <div id="springControls" class="spring-controls" hidden>
+          <label class="force-field">
+            <input id="forceInput" type="number" min="0" max="10" step="0.1" inputmode="decimal">
+            <span>N</span>
+          </label>
+          <div class="small-button-row">
+            <button id="forceDownBtn" type="button">-0.1</button>
+            <button id="forceUpBtn" type="button">+0.1</button>
+            <button id="rotateSpringBtn" type="button" aria-label="引く向きを90度回転">回転</button>
+          </div>
+          <button id="removeSpringBtn" class="danger-button" type="button">このばねばかりを外す</button>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <div id="dragGhost" class="drag-ghost" aria-hidden="true"></div>
+  <script src="script.js"></script>
+</body>
+</html>
